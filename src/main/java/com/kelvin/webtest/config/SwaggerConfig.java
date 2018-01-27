@@ -46,7 +46,7 @@ public class SwaggerConfig {
                 .description("EHR Platform's REST API, all the applications could access the Object model data via JSON.")//详细描述
                 .version("1.0")//版本
                 .termsOfServiceUrl("NO terms of service")
-                .contact(new Contact("小单", "url", "email"))//作者
+                .contact(new Contact("name", "url", "email"))//作者
                 .license("The Apache License, Version 2.0")
                 .licenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html")
                 .build();
