@@ -54,18 +54,15 @@ public class SwaggerConfig {
 
     @Bean
     public Docket createRestApi() {
-        Predicate<RequestHandler> predicate = new Predicate<RequestHandler>() {
-            @Override
-            public boolean apply(RequestHandler input) {
-                Class<?> declaringClass = input.declaringClass();
-                if (declaringClass == BasicErrorController.class)// 排除
-                    return false;
-                if(declaringClass.isAnnotationPresent(RestController.class)) // 被注解的类
-                    return true;
-                if(input.isAnnotatedWith(ResponseBody.class)) // 被注解的方法
-                    return true;
+        Predicate<RequestHandler> predicate = input -> {
+            Class<?> declaringClass = input.declaringClass();
+            if (declaringClass == BasicErrorController.class)// 排除
                 return false;
-            }
+            if(declaringClass.isAnnotationPresent(RestController.class)) // 被注解的类
+                return true;
+            if(input.isAnnotatedWith(ResponseBody.class)) // 被注解的方法
+                return true;
+            return false;
         };
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
